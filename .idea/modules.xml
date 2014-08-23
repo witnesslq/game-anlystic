@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/anlystic/anlystic.iml" filepath="$PROJECT_DIR$/anlystic/anlystic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/game-anlystic.iml" filepath="$PROJECT_DIR$/game-anlystic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/game-web/game-web.iml" filepath="$PROJECT_DIR$/game-web/game-web.iml" />
+    </modules>
+  </component>
+</project>
+
