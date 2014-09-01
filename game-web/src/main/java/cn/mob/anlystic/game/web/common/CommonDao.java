@@ -17,18 +17,17 @@ import javax.annotation.Resource;
 @Component
 public class CommonDao {
 
+    protected DB db;
     @Resource
     private Mongo mongo;
 
-    protected DB db;
-
     @PostConstruct
-    public void init(){
+    public void init() {
         db = mongo.getDB(R.dbName);
     }
 
-    public DBCursor find(String collectionName,DBObject query){
-       return db.getCollection(collectionName).find(query);
+    public DBCursor find(String collectionName, DBObject query) {
+        return db.getCollection(collectionName).find(query);
     }
 
 

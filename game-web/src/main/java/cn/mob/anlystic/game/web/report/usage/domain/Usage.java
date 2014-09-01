@@ -1,4 +1,4 @@
-package cn.mob.anlystic.game.web.report.usage.bean;
+package cn.mob.anlystic.game.web.report.usage.domain;
 
 /**
  * @version 1.0 date: 2014/8/25
