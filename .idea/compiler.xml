@@ -22,9 +22,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="game-anlystic" />
+        <module name="anlystic" />
+        <module name="game-web" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="game-web" target="1.6" />
+    </bytecodeTargetLevel>
   </component>
 </project>
 
