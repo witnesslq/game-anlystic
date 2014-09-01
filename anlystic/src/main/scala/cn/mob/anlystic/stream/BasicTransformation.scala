@@ -20,7 +20,8 @@ object BasicTransformation {
       // transform
       map(line => line.toUpperCase).
       // print to console (can also use ``foreach(println)``)
-      foreach(transformedLine => println(transformedLine)).
+      foreach(transformedLine => println(transformedLine))
+      .
       onComplete(FlowMaterializer(MaterializerSettings())) {
         case Success(_) => system.shutdown()
         case Failure(e) =>
