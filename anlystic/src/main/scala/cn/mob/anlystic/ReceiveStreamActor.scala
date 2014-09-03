@@ -1,6 +1,8 @@
 package cn.mob.anlystic
 
-import akka.actor.{Props, ActorLogging, Actor}
+import akka.actor._
+import akka.actor.Terminated
+import akka.actor.DeathPactException
 
 /**
  * @version 1.0 date : 2014/9/2
@@ -12,6 +14,11 @@ class ReceiveStreamActor extends Actor with ActorLogging{
 
   override def preStart():Unit = {
     println("start receive stream actor now")
+  }
+
+  override def unhandled(message: Any): Unit = {
+    println("handled unhandled message")
+    super.unhandled(message)
   }
 
   def receive = {
