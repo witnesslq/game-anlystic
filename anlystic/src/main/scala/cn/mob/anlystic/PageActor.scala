@@ -6,11 +6,11 @@ import akka.actor.{ActorLogging, Actor}
  * @version 1.0 date : 2014/9/2
  * @author : Dempe 
  */
-class PageActor extends Actor with ActorLogging{
+class PageActor extends Actor with ActorLogging {
   def receive = {
-    case msg : String =>{
+    case msg: String => {
       //
-      log.info("page====>"+msg)
+      log.info("page====>" + msg)
 
     }
   }

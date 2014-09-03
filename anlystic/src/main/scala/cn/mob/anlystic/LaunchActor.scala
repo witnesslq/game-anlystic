@@ -6,11 +6,11 @@ import akka.actor.{ActorLogging, Actor}
  * @version 1.0 date : 2014/9/2
  * @author : Dempe 
  */
-class LaunchActor extends Actor with ActorLogging{
+class LaunchActor extends Actor with ActorLogging {
   def receive = {
-    case msg : String =>{
+    case msg: String => {
       //
-      log.info("launch====>"+msg)
+      log.info("launch====>" + msg)
 
     }
   }

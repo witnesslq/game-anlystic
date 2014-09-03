@@ -1,6 +1,6 @@
 package cn.mob.anlystic
 
-import com.alibaba.fastjson.{JSON, JSONObject, JSONArray}
+import com.alibaba.fastjson.{JSON, JSONObject}
 import scala.io.Source
 
 /**
@@ -9,15 +9,15 @@ import scala.io.Source
  */
 object MessageResource {
 
-  def readStringMsg(fileName:String):String = {
-    val strBuf : StringBuffer = new StringBuffer()
-    Source.fromFile(fileName).getLines().foreach(value=>{
+  def readStringMsg(fileName: String): String = {
+    val strBuf: StringBuffer = new StringBuffer()
+    Source.fromFile(fileName).getLines().foreach(value => {
       strBuf.append(value)
     });
     JSON.parse(strBuf.toString).toString
   }
 
-  def readJSONMsg(fileName:String) :JSONObject = {
+  def readJSONMsg(fileName: String): JSONObject = {
     val strMsg = readStringMsg(fileName)
     JSON.parseObject(strMsg)
   }
