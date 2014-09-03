@@ -1,9 +1,9 @@
 package cn.mob.anlystic.stream
 
 import akka.actor.ActorSystem
-import akka.stream.{ FlowMaterializer, MaterializerSettings }
+import akka.stream.{FlowMaterializer, MaterializerSettings}
 import akka.stream.scaladsl.Flow
-import java.io.{ FileOutputStream, PrintWriter }
+import java.io.{FileOutputStream, PrintWriter}
 import org.reactivestreams.api.Producer
 import scala.concurrent.forkjoin.ThreadLocalRandom
 import scala.util.Try
@@ -29,15 +29,17 @@ object WritePrimes {
     // write to file  
     val output = new PrintWriter(new FileOutputStream("target/primes.txt"), true)
     Flow(producer).
-      foreach { prime =>
+      foreach {
+      prime =>
         output.println(prime)
         // simulate slow consumer
         Thread.sleep(1000)
-      }.
-      onComplete(materializer) { _ =>
+    }.
+      onComplete(materializer) {
+      _ =>
         Try(output.close())
         system.shutdown()
-      }
+    }
 
     // write to console  
     Flow(producer).

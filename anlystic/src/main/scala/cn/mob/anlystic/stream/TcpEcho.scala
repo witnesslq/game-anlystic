@@ -3,13 +3,13 @@ package cn.mob.anlystic.stream
 import akka.actor.ActorSystem
 import akka.io.IO
 import akka.pattern.ask
-import akka.stream.{ FlowMaterializer, MaterializerSettings }
+import akka.stream.{FlowMaterializer, MaterializerSettings}
 import akka.stream.io.StreamTcp
 import akka.stream.scaladsl.Flow
-import akka.util.{ ByteString, Timeout }
+import akka.util.{ByteString, Timeout}
 import java.net.InetSocketAddress
 import scala.concurrent.duration._
-import scala.util.{ Failure, Success }
+import scala.util.{Failure, Success}
 
 object TcpEcho {
 
@@ -56,11 +56,11 @@ object TcpEcho {
       case serverBinding: StreamTcp.TcpServerBinding =>
         println("Server started, listening on: " + serverBinding.localAddress)
 
-        Flow(serverBinding.connectionStream).foreach { conn ⇒
-          println("Client connected from: " + conn.remoteAddress)
-          conn.inputStream.produceTo(conn.outputStream)
-        }
-          //.consume(materializer)
+        Flow(serverBinding.connectionStream).foreach {
+          conn ⇒
+            println("Client connected from: " + conn.remoteAddress)
+            conn.inputStream.produceTo(conn.outputStream)
+        }.consume(materializer)
     }
 
     serverFuture.onFailure {
@@ -84,16 +84,18 @@ object TcpEcho {
         val testInput = ('a' to 'z').map(ByteString(_))
         Flow(testInput).toProducer(materializer).produceTo(clientBinding.outputStream)
 
-        Flow(clientBinding.inputStream).fold(Vector.empty[Char]) { (acc, in) ⇒ acc ++ in.map(_.asInstanceOf[Char]) }.
+        Flow(clientBinding.inputStream).fold(Vector.empty[Char]) {
+          (acc, in) ⇒ acc ++ in.map(_.asInstanceOf[Char])
+        }.
           foreach(result => println(s"Result: " + result.mkString("[", ", ", "]"))).
           onComplete(materializer) {
-            case Success(_) =>
-              println("Shutting down client")
-              system.shutdown()
-            case Failure(e) =>
-              println("Failure: " + e.getMessage)
-              system.shutdown()
-          }
+          case Success(_) =>
+            println("Shutting down client")
+            system.shutdown()
+          case Failure(e) =>
+            println("Failure: " + e.getMessage)
+            system.shutdown()
+        }
     }
 
     clientFuture.onFailure {
