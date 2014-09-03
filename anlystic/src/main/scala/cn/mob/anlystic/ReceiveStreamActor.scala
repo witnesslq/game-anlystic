@@ -1,6 +1,7 @@
 package cn.mob.anlystic
 
 import akka.actor._
+import cn.mob.anlystic.util.MetricsStat
 
 /**
  * @version 1.0 date : 2014/9/2
@@ -10,7 +11,10 @@ class ReceiveStreamActor extends Actor with ActorLogging {
 
   val unzipActor = context.actorOf(Props[UnzipActor], name = "unzip")
 
+  val metricsStat = MetricsStat.getInstance();
+
   override def preStart(): Unit = {
+
     println("start receive stream actor now")
   }
 
@@ -22,8 +26,12 @@ class ReceiveStreamActor extends Actor with ActorLogging {
   def receive = {
     case msg: String => {
       //
-      log.info("receive====>" + msg)
+      metricsStat.incrementAndGet();
+      // log.info("receive====>" + msg)
       unzipActor ! msg;
+
+    }
+    case _ => {
 
     }
   }

@@ -13,7 +13,10 @@ class ExitActor extends Actor with ActorLogging {
       log.info("exit====>" + msg)
     }
     case tuple: ExitDataTuple => {
-      println("exit tuple===>" + tuple)
+      //println("exit tuple===>" + tuple)
+    }
+    case _ => {
+
     }
   }
 }

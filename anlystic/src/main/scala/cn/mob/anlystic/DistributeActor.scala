@@ -24,7 +24,7 @@ class DistributeActor extends Actor with ActorLogging {
   def receive = {
     case msg: String => {
       //
-      log.info("distribute====>" + msg)
+      //log.info("distribute====>" + msg)
       val jsonMsg = JSON.parseObject(msg).getJSONObject(R.m)
       if (validator(jsonMsg)) {
         val deviceData = jsonMsg.getJSONObject(R.device_data)
@@ -53,7 +53,11 @@ class DistributeActor extends Actor with ActorLogging {
 
 
     }
+    case _ => {
+
+    }
   }
+
 
   def validator(json: JSONObject): Boolean = {
     true;

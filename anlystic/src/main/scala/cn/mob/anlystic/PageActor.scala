@@ -15,7 +15,10 @@ class PageActor extends Actor with ActorLogging {
     }
 
     case tuple: PageDataTuple => {
-      println("page tuple===>" + tuple)
+      // println("page tuple===>" + tuple)
+    }
+    case _ => {
+
     }
   }
 }

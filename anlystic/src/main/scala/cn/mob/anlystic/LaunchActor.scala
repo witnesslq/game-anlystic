@@ -16,7 +16,7 @@ class LaunchActor extends Actor with ActorLogging {
 
     }
     case tuple: LaunchDataTuple => {
-      println("launch tuple===>" + tuple)
+      //println("launch tuple===>" + tuple)
       val launchDatas = tuple.launchData
       val key = tuple.version + R.split + tuple.channel;
       launchDatas.toArray().foreach(ld => {
@@ -24,8 +24,10 @@ class LaunchActor extends Actor with ActorLogging {
 
         val basekey = new StringBuffer(R.split).append(tuple.version).append(R.split).append(tuple.channel).
           append(R.split).append(createDate).toString
+
         ReportDB.hincrBy(R.usage_daily + basekey, R.drun)
         ReportDB.hincrBy(R.usage + R.split + createDate, R.drun)
+
         val deviceKey = basekey + R.split
 
         //device
@@ -37,6 +39,9 @@ class LaunchActor extends Actor with ActorLogging {
         ReportDB.hincrBy(R.device_province + deviceKey + tuple.province, R.drun)
       })
 
+
+    }
+    case _ => {
 
     }
   }

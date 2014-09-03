@@ -12,7 +12,15 @@ object Main extends App {
   val system = ActorSystem("anlystic");
   val receiveStreamActor = system.actorOf(Props[ReceiveStreamActor], name = "receiveStreamActor")
   val msg = MessageResource.readStringMsg(R.fileName)
-  receiveStreamActor ! msg
+  var num: Int = 0;
+  while (true) {
+    receiveStreamActor ! msg
+    num = num + 1;
+    if (num % 10000 == 0) {
+      Thread.sleep(100)
+    }
+  }
+
 
 
 
