@@ -13,5 +13,8 @@ class LaunchActor extends Actor with ActorLogging {
       log.info("launch====>" + msg)
 
     }
+    case tuple: LaunchDataTupe => {
+      log.info("tuple-deviceId===>" + tuple.deviceId)
+    }
   }
 }
