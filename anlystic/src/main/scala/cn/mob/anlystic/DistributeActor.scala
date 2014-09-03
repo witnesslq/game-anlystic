@@ -1,14 +1,15 @@
 package cn.mob.anlystic
 
 import akka.actor.{Props, ActorLogging, Actor}
-import com.alibaba.fastjson.{JSONArray, JSON}
+import com.alibaba.fastjson.{JSONObject, JSONArray, JSON}
 
 /**
  * @version 1.0 date : 2014/9/2
  * @author : Dempe 
  */
 
-case class LaunchDataTupe(deviceId: String, channel: String, version: String, launchData: String)
+case class LaunchDataTuple(deviceId: String, channel: String, version: String, model: String, sysver: String, os: String,
+                           network: String, country: String, province: String, launchData: JSONArray)
 
 case class PageDataTuple(deviceId: String, channel: String, version: String, pageData: JSONArray)
 
@@ -25,27 +26,37 @@ class DistributeActor extends Actor with ActorLogging {
       //
       log.info("distribute====>" + msg)
       val jsonMsg = JSON.parseObject(msg).getJSONObject(R.m)
-      val deviceData = jsonMsg.getJSONObject(R.device_data)
+      if (validator(jsonMsg)) {
+        val deviceData = jsonMsg.getJSONObject(R.device_data)
 
-      val deviceId = deviceData.getString(R.device_id)
-      val version = deviceData.getString(R.version)
-      val channel = deviceData.getString(R.channel)
-      val launchData = jsonMsg.getJSONArray(R.launch_data)
-      val pageData = jsonMsg.getJSONArray(R.page_data)
-      val exitData = jsonMsg.getJSONArray(R.exit_data)
-      // launchActor ! launchData.toJSONString
-      launchActor ! LaunchDataTupe(deviceId, channel, version, launchData.toJSONString)
-      //pageActor ! pageData.toJSONString
-      pageActor ! PageDataTuple(deviceId, channel, version, pageData)
-      // exitActor ! exitData.toJSONString
-      exitActor ! ExitDataTuple(deviceId, channel, version, exitData)
+        val deviceId = deviceData.getString(R.device_id)
+        val version = deviceData.getString(R.version)
+        val channel = deviceData.getString(R.channel)
+        val model = deviceData.getString(R.model)
+        val sysver = deviceData.getString(R.sysver)
+        val os = deviceData.getString(R.os)
+        val network = deviceData.getString(R.network)
+        val country = deviceData.getString(R.country)
+        val province = deviceData.getString(R.province)
+
+        val launchData = jsonMsg.getJSONArray(R.launch_data)
+        val pageData = jsonMsg.getJSONArray(R.page_data)
+        val exitData = jsonMsg.getJSONArray(R.exit_data)
+
+        launchActor ! LaunchDataTuple(deviceId, channel, version, model, sysver, os, network, country, province, launchData)
+        pageActor ! PageDataTuple(deviceId, channel, version, pageData)
+        exitActor ! ExitDataTuple(deviceId, channel, version, exitData)
+
+      } else {
+        println("error msg")
+      }
 
 
     }
   }
 
-  //  def validator(json: JSONObject) = {
-  //
-  //  }
+  def validator(json: JSONObject): Boolean = {
+    true;
+  }
 
 }
