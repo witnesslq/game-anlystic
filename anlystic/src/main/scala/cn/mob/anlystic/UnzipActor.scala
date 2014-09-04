@@ -8,7 +8,7 @@ import akka.actor.{Props, ActorLogging, Actor}
  */
 class UnzipActor extends Actor with ActorLogging {
 
-  val distributeActor = context.actorOf(Props[DistributeActor], name = "distribute")
+  val distributeActor = context.actorOf(Props[DistributeActor].withMailbox("bounded-mailbox"), name = "distribute")
 
   override def preStart(): Unit = {
     println("start unzip actor now")
@@ -18,7 +18,7 @@ class UnzipActor extends Actor with ActorLogging {
     case msg: String => {
       //
       //log.info("unzip====>" + msg)
-      distributeActor ! msg
+      //distributeActor ! msg
 
     }
     case _ => {

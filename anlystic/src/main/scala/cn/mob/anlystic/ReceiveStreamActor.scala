@@ -9,7 +9,7 @@ import cn.mob.anlystic.util.MetricsStat
  */
 class ReceiveStreamActor extends Actor with ActorLogging {
 
-  val unzipActor = context.actorOf(Props[UnzipActor], name = "unzip")
+  val unzipActor = context.actorOf(Props[UnzipActor].withMailbox("bounded-mailbox"), name = "unzip")
 
   val metricsStat = MetricsStat.getInstance();
 

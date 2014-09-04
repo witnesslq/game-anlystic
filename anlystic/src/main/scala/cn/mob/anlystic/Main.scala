@@ -1,7 +1,8 @@
 package cn.mob.anlystic
 
 import akka.actor.{Props, ActorSystem}
-import cn.mob.anlystic.store.ReportDB
+import scala.concurrent.duration._
+import com.typesafe.config.ConfigFactory
 
 /**
  * @version 1.0 date : 2014/9/2
@@ -9,27 +10,23 @@ import cn.mob.anlystic.store.ReportDB
  */
 object Main extends App {
 
-  val system = ActorSystem("anlystic");
-  val receiveStreamActor = system.actorOf(Props[ReceiveStreamActor], name = "receiveStreamActor")
+  val system = ActorSystem("anlystic", ConfigFactory.load("app"));
+  val receiveStreamActor = system.actorOf(Props[ReceiveStreamActor].withMailbox("bounded-mailbox"), name = "receiveStreamActor")
   val msg = MessageResource.readStringMsg(R.fileName)
   var num: Int = 0;
-  while (true) {
-    receiveStreamActor ! msg
-    num = num + 1;
-    if (num % 10000 == 0) {
-      Thread.sleep(100)
+  //Use the system’s dispatcher as ExecutionContext
 
-    }
+  import system.dispatcher
+
+  system.scheduler.schedule(0 milliseconds, 100 milliseconds) {
+    (1 to 1000000).foreach(v => receiveStreamActor ! msg)
   }
 
-
-
-
-  while (true) {
-    Thread.sleep(5000)
-    ReportDB.sync
-  }
-
-  system.shutdown()
+  //  while (true) {
+  //    Thread.sleep(5000)
+  //    ReportDB.sync
+  //  }
+  //
+  //  system.shutdown()
 
 }
