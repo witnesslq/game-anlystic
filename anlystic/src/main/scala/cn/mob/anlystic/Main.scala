@@ -18,6 +18,7 @@ object Main extends App {
     num = num + 1;
     if (num % 10000 == 0) {
       Thread.sleep(100)
+
     }
   }
 
