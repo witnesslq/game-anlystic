@@ -23,6 +23,8 @@
             <artifactId>spring-data-mongodb</artifactId>
             <version>1.5.4.RELEASE</version>
         </dependency>
+
+
     </dependencies>
 
 
