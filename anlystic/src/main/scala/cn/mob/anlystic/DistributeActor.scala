@@ -17,9 +17,9 @@ case class ExitDataTuple(deviceId: String, channel: String, version: String, exi
 
 class DistributeActor extends Actor with ActorLogging {
 
-  val pageActor = context.actorOf(Props[PageActor], name = "page")
-  val exitActor = context.actorOf(Props[ExitActor], name = "exit")
-  val launchActor = context.actorOf(Props[LaunchActor], name = "launch")
+  val pageActor = context.actorOf(Props[PageActor].withMailbox("bounded-mailbox"), name = "page")
+  val exitActor = context.actorOf(Props[ExitActor].withMailbox("bounded-mailbox"), name = "exit")
+  val launchActor = context.actorOf(Props[LaunchActor].withMailbox("bounded-mailbox"), name = "launch")
 
   def receive = {
     case msg: String => {
@@ -53,9 +53,7 @@ class DistributeActor extends Actor with ActorLogging {
 
 
     }
-    case _ => {
 
-    }
   }
 
 

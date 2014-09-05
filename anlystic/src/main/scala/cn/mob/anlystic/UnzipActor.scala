@@ -18,7 +18,7 @@ class UnzipActor extends Actor with ActorLogging {
     case msg: String => {
       //
       //log.info("unzip====>" + msg)
-      //distributeActor ! msg
+      distributeActor ! msg
 
     }
     case _ => {

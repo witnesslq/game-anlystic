@@ -11,7 +11,7 @@ import com.typesafe.config.ConfigFactory
 object Main extends App {
 
   val system = ActorSystem("anlystic", ConfigFactory.load("app"));
-  val receiveStreamActor = system.actorOf(Props[ReceiveStreamActor].withDispatcher("my-dispatcher"), name = "receiveStreamActor")
+  val receiveStreamActor = system.actorOf(Props[ReceiveStreamActor].withMailbox("bounded-mailbox"), name = "receiveStreamActor")
   val msg = MessageResource.readStringMsg(R.fileName)
   var num: Int = 0;
   //Use the system’s dispatcher as ExecutionContext
