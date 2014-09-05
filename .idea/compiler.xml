@@ -24,11 +24,13 @@
         <processorPath useClasspath="true" />
         <module name="anlystic" />
         <module name="game-web" />
+        <module name="query" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="anlystic" target="1.6" />
       <module name="game-web" target="1.6" />
+      <module name="query" target="1.6" />
     </bytecodeTargetLevel>
   </component>
 </project>

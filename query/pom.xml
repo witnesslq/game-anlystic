@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.mob.anlystic</groupId>
-    <artifactId>game-web</artifactId>
+    <artifactId>query</artifactId>
 
 
     <dependencies>
