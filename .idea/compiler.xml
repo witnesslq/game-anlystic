@@ -24,7 +24,6 @@
         <processorPath useClasspath="true" />
         <module name="anlystic" />
         <module name="game-web" />
-        <module name="query" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/anlystic/anlystic.iml" filepath="$PROJECT_DIR$/anlystic/anlystic.iml" />
       <module fileurl="file://$PROJECT_DIR$/game-anlystic.iml" filepath="$PROJECT_DIR$/game-anlystic.iml" />
-      <module fileurl="file://$PROJECT_DIR$/query/query.iml" filepath="$PROJECT_DIR$/query/query.iml" />
     </modules>
   </component>
 </project>
