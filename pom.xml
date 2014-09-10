@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
     <version>1.0-beta</version>
     <modules>
-        <module>game-web</module>
+        <module>query</module>
         <module>anlystic</module>
     </modules>
 
