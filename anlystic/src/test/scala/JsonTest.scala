@@ -1,4 +1,4 @@
-import cn.mob.anlystic.MessageResource
+import cn.mob.anlystic.demo.MessageResource
 
 /**
  * @version 1.0 date : 2014/9/3

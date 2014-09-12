@@ -1,14 +1,28 @@
-package cn.mob.anlystic.store
+package cn.mob.anlystic
 
+import akka.actor.Actor
 import java.util.concurrent.ConcurrentHashMap
 import java.util.HashMap
 
 /**
- * @version 1.0 date : 2014/9/3
+ * 收集各节点发送上来的数据，reduceByKey
+ * 定期同步数据到mongodb，
+ * 数据同步actor可有多个，提高同步效率
+ * @version 1.0 date : 2014/9/12
  * @author : Dempe 
  */
-object ReportDB {
+class SyncDBActor extends Actor {
 
+  def receive = {
+    Case cmd: String => {
+
+
+    }
+  }
+
+}
+
+object MapDB {
   val reportMap: ConcurrentHashMap[String, HashMap[String, Int]] = new ConcurrentHashMap[String, HashMap[String, Int]]()
 
   def hincrByValue(key: String, field: String, value: Int) = {
@@ -23,9 +37,13 @@ object ReportDB {
     reportMap.put(key, fieldMap)
   }
 
-  def hincrBy(key: String, field: String) = {
-    hincrByValue(key, field, 1)
+
+  def sync = {
+    println("===>sync now")
+    val iter = reportMap.keySet().iterator()
+    while (iter.hasNext) {
+      println(iter.next())
+    }
+
   }
-
-
 }

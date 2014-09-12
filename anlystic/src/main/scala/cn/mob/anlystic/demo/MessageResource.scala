@@ -1,4 +1,4 @@
-package cn.mob.anlystic
+package cn.mob.anlystic.demo
 
 import com.alibaba.fastjson.{JSON, JSONObject}
 import scala.io.Source

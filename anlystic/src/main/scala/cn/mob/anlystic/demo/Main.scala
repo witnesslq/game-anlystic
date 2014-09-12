@@ -1,8 +1,9 @@
-package cn.mob.anlystic
+package cn.mob.anlystic.demo
 
 import akka.actor.{Props, ActorSystem}
 import scala.concurrent.duration._
 import com.typesafe.config.ConfigFactory
+import cn.mob.anlystic.R
 
 /**
  * @version 1.0 date : 2014/9/2

@@ -1,8 +1,9 @@
-package cn.mob.anlystic
+package cn.mob.anlystic.demo
 
 import akka.actor.{ActorLogging, Actor}
 import cn.mob.anlystic.store.ReportDB
 import com.alibaba.fastjson.JSONObject
+import cn.mob.anlystic.R
 
 /**
  * @version 1.0 date : 2014/9/2

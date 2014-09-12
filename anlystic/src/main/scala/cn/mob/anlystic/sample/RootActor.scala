@@ -2,13 +2,12 @@ package cn.mob.anlystic.sample
 
 import akka.actor.{ActorSystem, Actor, Props}
 import akka.routing.RoundRobinRouter
-import com.typesafe.config.ConfigFactory
 
 /**
  * @version 1.0 date : 2014/9/5
  * @author : Dempe 
  */
-object RootActor extends App{
+object RootActor extends App {
 
   val system = ActorSystem("sample");
   val router1 = system.actorOf(Props[ExampleActor1].withRouter(
@@ -20,8 +19,9 @@ object RootActor extends App{
 
 
 }
-class  ExampleActor1 extends Actor{
-  def receive ={
-    case msg :String =>println("===>hello " + msg+" "+ self.path.name)
+
+class ExampleActor1 extends Actor {
+  def receive = {
+    case msg: String => println("===>hello " + msg + " " + self.path.name)
   }
 }

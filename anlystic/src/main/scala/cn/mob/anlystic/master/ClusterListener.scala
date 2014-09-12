@@ -10,7 +10,7 @@ import akka.cluster.ClusterEvent.UnreachableMember
  * @version 1.0 date : 2014/9/12
  * @author : Dempe 
  */
-class ClusterListener  extends Actor with ActorLogging {
+class ClusterListener extends Actor with ActorLogging {
 
   val cluster = Cluster(context.system)
 
@@ -21,6 +21,7 @@ class ClusterListener  extends Actor with ActorLogging {
       classOf[MemberEvent], classOf[UnreachableMember])
     //#subscribe
   }
+
   override def postStop(): Unit = cluster.unsubscribe(self)
 
   def receive = {

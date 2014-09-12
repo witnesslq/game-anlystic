@@ -1,4 +1,4 @@
-package cn.mob.anlystic
+package cn.mob.anlystic.demo
 
 import akka.actor._
 import cn.mob.anlystic.util.MetricsStat

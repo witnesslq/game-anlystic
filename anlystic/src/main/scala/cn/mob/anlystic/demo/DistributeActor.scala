@@ -1,7 +1,8 @@
-package cn.mob.anlystic
+package cn.mob.anlystic.demo
 
 import akka.actor.{Props, ActorLogging, Actor}
 import com.alibaba.fastjson.{JSONObject, JSONArray, JSON}
+import cn.mob.anlystic.R
 
 /**
  * @version 1.0 date : 2014/9/2
@@ -43,9 +44,9 @@ class DistributeActor extends Actor with ActorLogging {
         val pageData = jsonMsg.getJSONArray(R.page_data)
         val exitData = jsonMsg.getJSONArray(R.exit_data)
 
-                launchActor ! LaunchDataTuple(deviceId, channel, version, model, sysver, os, network, country, province, launchData)
-                pageActor ! PageDataTuple(deviceId, channel, version, pageData)
-                exitActor ! ExitDataTuple(deviceId, channel, version, exitData)
+        launchActor ! LaunchDataTuple(deviceId, channel, version, model, sysver, os, network, country, province, launchData)
+        pageActor ! PageDataTuple(deviceId, channel, version, pageData)
+        exitActor ! ExitDataTuple(deviceId, channel, version, exitData)
 
       } else {
         println("error msg")
