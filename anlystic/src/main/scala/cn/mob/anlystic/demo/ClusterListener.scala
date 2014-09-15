@@ -1,4 +1,4 @@
-package cn.mob.anlystic.master
+package cn.mob.anlystic.demo
 
 import akka.actor.{Actor, ActorLogging}
 import akka.cluster.Cluster

@@ -14,7 +14,7 @@ import java.util.HashMap
 class SyncDBActor extends Actor {
 
   def receive = {
-    Case cmd: String => {
+    case cmd: String => {
 
 
     }

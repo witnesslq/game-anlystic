@@ -10,10 +10,15 @@ import akka.actor.Actor
 class AnalysisAcotor extends Actor {
 
   def receive = {
+
+    case  msg :String =>{
+      println(msg)
+
+    }
     //
-    LaunchAnalysis.process
-    PageAnalysis.process
-    EventAnalysis.process
+//    LaunchAnalysis.process
+//    PageAnalysis.process
+//    EventAnalysis.process
   }
 
 }

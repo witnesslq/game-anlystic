@@ -1,6 +1,6 @@
 package cn.mob.anlystic.worker
 
-import akka.actor.Actor
+import akka.actor.{Props, Actor}
 import cn.mob.anlystic.util.Utils
 
 /**
@@ -10,8 +10,13 @@ import cn.mob.anlystic.util.Utils
  */
 class UnzipActor extends Actor {
 
+  val anlysisActor = context.actorOf(Props[AnalysisAcotor],"analysis")
 
   def receive = {
+
+    case msg : String =>{
+
+    }
 
   }
 
