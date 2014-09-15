@@ -6,4 +6,6 @@ package cn.mob.anlystic
  */
 object Conf {
 
+  uris : Seq;
+
 }
