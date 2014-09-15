@@ -4,6 +4,7 @@ import akka.actor.{Props, ActorSystem}
 import com.typesafe.config.ConfigFactory
 import cn.mob.anlystic.worker.AnalysisAcotor
 import akka.routing.FromConfig
+import scala.concurrent.duration._
 
 /**
   * @version 1.0 date : 2014/9/15

@@ -7,9 +7,14 @@ import com.typesafe.config.ConfigFactory
  * @author : Dempe 
  */
 object TestMain extends App{
+   val conf = ConfigFactory.load("work")
+  val iter = conf.entrySet().iterator()
+  while (iter.hasNext){
+    println(iter.next())
+  }
 
-  val conf = ConfigFactory.parseString("akka.actor.deployment.target.nodes="+
-    "['akka.tcp://anlystic-worker@192.168.1.144:2554']").withFallback(ConfigFactory.load("application"))
+  println(conf.getString("akka.remote.netty.tcp.port"))
+  println(conf.getString("akka.remote.netty.tcp.hostname"))
 
-  println(conf)
+
 }

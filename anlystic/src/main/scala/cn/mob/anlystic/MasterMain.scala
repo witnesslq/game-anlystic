@@ -16,18 +16,23 @@ object MasterMain extends App{
   val conf = ConfigFactory.load("application")
   val system = ActorSystem("anlystic-master",conf)
 
-  val ports = Seq(2553,2554,2555)
 
-  val adds = ports.map(port=>{
-    //Address("akka.tcp", "anlystic-worker", "192.168.1.144", port)
-    AddressFromURIString("akka.tcp://anlystic-worker@192.168.1.144:"+port)
-  })
 
   //val router = system.actorOf(Props[AnalysisAcotor].withRouter(FromConfig()),"routees")
+
+  import system.dispatcher
+
+  while (Conf.uris.size==0){
+    println("node is 0, sleep 1 second")
+    Thread.sleep(1000)
+  }
+  val adds = Conf.uris.map(uri=>{
+    //Address("akka.tcp", "anlystic-worker", "192.168.1.144", port)
+    AddressFromURIString("akka.tcp://anlystic-worker@"+uri)
+  })
   val router = system.actorOf(Props[AnalysisAcotor].withRouter(
     RemoteRouterConfig(RoundRobinRouter(5), adds)))
 
-  import system.dispatcher
 
   system.scheduler.schedule(0 milliseconds, 1000 milliseconds) {
     (1 to 3).foreach(v => router ! "hello master message")

@@ -5,7 +5,8 @@ package cn.mob.anlystic
  * @author : Dempe 
  */
 object Conf {
+  var uris = Set[String]()
 
-  uris : Seq;
+
 
 }
