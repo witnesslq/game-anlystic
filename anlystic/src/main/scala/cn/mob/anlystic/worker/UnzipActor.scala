@@ -10,11 +10,11 @@ import cn.mob.anlystic.util.Utils
  */
 class UnzipActor extends Actor {
 
-  val anlysisActor = context.actorOf(Props[AnalysisAcotor],"analysis")
+  val anlysisActor = context.actorOf(Props[AnalysisAcotor], "analysis")
 
   def receive = {
 
-    case msg : String =>{
+    case msg: String => {
 
     }
 

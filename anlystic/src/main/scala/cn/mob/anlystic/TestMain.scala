@@ -6,10 +6,10 @@ import com.typesafe.config.ConfigFactory
  * @version 1.0 date : 2014/9/15
  * @author : Dempe 
  */
-object TestMain extends App{
-   val conf = ConfigFactory.load("work")
+object TestMain extends App {
+  val conf = ConfigFactory.load("work")
   val iter = conf.entrySet().iterator()
-  while (iter.hasNext){
+  while (iter.hasNext) {
     println(iter.next())
   }
 

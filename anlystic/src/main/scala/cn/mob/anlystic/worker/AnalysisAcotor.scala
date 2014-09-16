@@ -1,6 +1,6 @@
 package cn.mob.anlystic.worker
 
-import akka.actor.Actor
+import akka.actor.{ReceiveTimeout, Actor}
 
 /**
  * 处理数据统计分析核心业务
@@ -11,14 +11,20 @@ class AnalysisAcotor extends Actor {
 
   def receive = {
 
-    case  msg :String =>{
+    case msg: String => {
       println(msg)
 
     }
-    //
-//    LaunchAnalysis.process
-//    PageAnalysis.process
-//    EventAnalysis.process
+    case ReceiveTimeout => {
+      println("receive time out")
+    }
+
+
   }
+
+  //
+  //    LaunchAnalysis.process
+  //    PageAnalysis.process
+  //    EventAnalysis.process
 
 }
