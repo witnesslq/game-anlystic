@@ -14,19 +14,15 @@ object MasterMain extends App {
   val conf = ConfigFactory.load("application")
   val system = ActorSystem("anlystic-master", conf)
 
-  while (Conf.uris.size == 0) {
-    println("node is 0, sleep 1 second")
-    Thread.sleep(1000)
-  }
-
   val queue: ShareQueue = new ShareQueue()
 
   while (true) {
     val appkeyAndDeviceId = queue.consume()
     // 必须为alive状态的worker
     val hostUrl = Utils.getHostByKey(appkeyAndDeviceId)
+    println("hosturl===>"+hostUrl)
     val path = "akka.tcp://anlystic-worker@" + hostUrl + "/user/analysisActor"
-    val worker: ActorSelection = WorkerPool.getActor(path)
+    val worker: ActorSelection = WorkerPool.get(path)
     worker ! appkeyAndDeviceId
 
     Thread.sleep(5000)
@@ -39,12 +35,13 @@ object MasterMain extends App {
       pool.put(path, worker)
     }
 
-    def get(path: String) = {
+    def get(path: String):ActorSelection = {
       var worker = pool.get(path)
       if (worker == null) {
         worker = system.actorSelection(ActorPath.fromString(path))
         pool.put(path, worker)
       }
+      worker
     }
   }
 

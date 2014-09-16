@@ -15,11 +15,13 @@ case object Dead extends State
 object NodeStateManager {
   var nodes = new ConcurrentHashMap[String, State]()
 
-  def isAlive(path: String) {
+  def isAlive(path: String) :Boolean={
+    var flag = false;
     nodes.get(path) match {
-      case Alive => true
-      case Dead => false
+      case Alive => flag = true;
+      case Dead =>
     }
+    flag
   }
 
   def put(path: String, state: State) = {
@@ -31,12 +33,11 @@ object NodeStateManager {
   }
 
   def getAliveNodeList: List[NodeState] = {
-    val nodesList: java.util.ArrayList[NodeState] = new java.util.ArrayList[NodeState]()
-    val iter: Iterator[java.util.Map.Entry[String, State]] = nodes.entrySet().iterator()
+    val nodesList = List[NodeState]()
+    val iter: java.util.Iterator[java.util.Map.Entry[String, State]] = nodes.entrySet().iterator()
     while (iter.hasNext) {
       val entry = iter.next()
-      NodeState(entry.getKey, entry.getValue)
-      nodesList.add(NodeState)
+      nodesList -> NodeState(entry.getKey, entry.getValue)
     }
     nodesList
   }

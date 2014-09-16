@@ -11,6 +11,7 @@ class Master extends Actor {
 
   def receive = {
     case state: NodeState => {
+      println("===>"+state.path)
       NodeStateManager.put(state.path, state.state)
     }
 
