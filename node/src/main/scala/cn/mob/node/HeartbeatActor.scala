@@ -11,6 +11,7 @@ class HeartbeatActor extends Actor {
 
   def receive = {
     case node: Node => {
+      println("heatbeat>>>"+node)
       NodeMananger.put(node)
     }
   }

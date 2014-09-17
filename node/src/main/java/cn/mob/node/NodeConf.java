@@ -15,8 +15,6 @@ public class NodeConf {
     private Node localNode;
     private List<Node> preNodes;
 
-    private String nodename = Conf.getString(Constants.NODE_NAME);
-
     // private List<Node> nextNodes;
 
     public NodeConf() {
@@ -48,9 +46,16 @@ public class NodeConf {
     }
 
     private Node fromString(String nodeStr) {
-        String hostname = StringUtils.substringBefore(nodeStr.toString(), ":");
-        int port = Integer.parseInt(StringUtils.substringAfter(nodeStr.toString(), ":"));
+        String nodename = StringUtils.substringBefore(nodeStr,"@");
+        String uri = StringUtils.substringAfter(nodeStr,"@");
+        String hostname = StringUtils.substringBefore(uri, ":");
+        int port = Integer.parseInt(StringUtils.substringAfter(uri, ":"));
         return new Node(nodename, hostname, port);
+    }
+
+    public String getLocalNodeName(){
+        String localNode = Conf.getString(Constants.LOCAL_NODE);
+        return StringUtils.substringBefore(localNode,"@");
     }
 
 

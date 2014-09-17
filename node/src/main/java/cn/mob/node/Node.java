@@ -1,10 +1,12 @@
 package cn.mob.node;
 
+import java.io.Serializable;
+
 /**
  * @author : Dempe
  * @version 1.0 date : 2014/9/17
  */
-public class Node {
+public class Node implements Serializable{
 
     private String nodename;
 
@@ -46,6 +48,10 @@ public class Node {
         if (nodename != null ? !nodename.equals(node.nodename) : node.nodename != null) return false;
 
         return true;
+    }
+
+    public String getNodename() {
+        return nodename;
     }
 
     @Override

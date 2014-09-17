@@ -2,6 +2,7 @@ package cn.mob.node
 
 import akka.actor.{ActorPath, Props, ActorSystem}
 import scala.concurrent.duration._
+import com.typesafe.config.ConfigFactory
 
 /**
  * @version 1.0 date : 2014/9/17
@@ -9,14 +10,18 @@ import scala.concurrent.duration._
  */
 object NodeServer extends App {
 
-  val nodeName = Conf.getString(Constants.NODE_NAME)
-  val system = ActorSystem(nodeName)
+  val nodeConf = new NodeConf()
+
+  val node = nodeConf.getLocalNode
+
+  var conf = ConfigFactory.parseString("akka.remote.netty.tcp.port="+node.getPort).withFallback(ConfigFactory.load("common"))
+  val system = ActorSystem(node.getNodename,conf)
 
   //启动心跳和job actor
   system.actorOf(Props[HeartbeatActor], "heartbeat")
   system.actorOf(Props[JobActor], "job")
 
-  val nodeConf = new NodeConf()
+
   val preNodes: java.util.List[Node] = nodeConf.getPreNodes()
   val preNodeActors = preNodes.toArray.map(node => {
     val path = node.toString + "/user/heartbeat"

@@ -6,6 +6,9 @@ import java.util.concurrent.ConcurrentHashMap
 /**
  * 执行job 并将消息分发到下游服务
  * 【可扩展通过多种策略分发，目前通过一致哈希算法分发】
+ * undo mailbox持久化到本地file
+ * undo 抽象出业务逻辑和分发代码
+ * undo 抽象出分发策略
  * @version 1.0 date : 2014/9/17
  * @author : Dempe 
  */
