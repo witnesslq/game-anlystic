@@ -1,7 +1,7 @@
 package cn.mob.anlystic.master
 
 import akka.actor._
-import cn.mob.anlystic.{NodeStateManager, NodeState}
+import cn.mob.anlystic.cluster.{NodeMananger, Node}
 
 /**
  * @version 1.0 date : 2014/9/15
@@ -10,9 +10,10 @@ import cn.mob.anlystic.{NodeStateManager, NodeState}
 class Master extends Actor {
 
   def receive = {
-    case state: NodeState => {
-      println("===>"+state.path)
-      NodeStateManager.put(state.path, state.state)
+    case node: Node => {
+
+      println(node.getHostname + ":" + node.getPort + " node heart beat")
+      NodeMananger.put(node);
     }
 
 

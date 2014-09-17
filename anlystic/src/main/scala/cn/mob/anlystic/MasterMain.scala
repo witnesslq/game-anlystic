@@ -4,6 +4,7 @@ import akka.actor._
 import com.typesafe.config.ConfigFactory
 import cn.mob.anlystic.util.{Utils, ShareQueue}
 import java.util.concurrent.ConcurrentHashMap
+import cn.mob.anlystic.cluster.HashedUtil
 
 /**
  * @version 1.0 date : 2014/9/15
@@ -19,8 +20,14 @@ object MasterMain extends App {
   while (true) {
     val appkeyAndDeviceId = queue.consume()
     // 必须为alive状态的worker
-    val hostUrl = Utils.getHostByKey(appkeyAndDeviceId)
-    println("hosturl===>"+hostUrl)
+    var hostUrl = HashedUtil.getNodeByKey(appkeyAndDeviceId)
+    while (hostUrl==null){
+      println("node is null, sleep 1s ")
+      Thread.sleep(1000)
+      hostUrl = HashedUtil.getNodeByKey(appkeyAndDeviceId)
+
+    }
+    println("hosturl===>" + hostUrl)
     val path = "akka.tcp://anlystic-worker@" + hostUrl + "/user/analysisActor"
     val worker: ActorSelection = WorkerPool.get(path)
     worker ! appkeyAndDeviceId
@@ -35,7 +42,7 @@ object MasterMain extends App {
       pool.put(path, worker)
     }
 
-    def get(path: String):ActorSelection = {
+    def get(path: String): ActorSelection = {
       var worker = pool.get(path)
       if (worker == null) {
         worker = system.actorSelection(ActorPath.fromString(path))
