@@ -1,4 +1,4 @@
-package cn.mob.anlystic.cluster;
+package cn.mob.node;
 
 
 import java.util.List;

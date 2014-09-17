@@ -11,6 +11,7 @@
     <modules>
         <module>query</module>
         <module>anlystic</module>
+        <module>node</module>
     </modules>
 
 

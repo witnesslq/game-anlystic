@@ -2,7 +2,7 @@ package cn.mob.anlystic
 
 import akka.actor._
 import com.typesafe.config.ConfigFactory
-import cn.mob.anlystic.util.{Utils, ShareQueue}
+import cn.mob.anlystic.util.ShareQueue
 import java.util.concurrent.ConcurrentHashMap
 import cn.mob.anlystic.cluster.HashedUtil
 
@@ -21,8 +21,8 @@ object MasterMain extends App {
     val appkeyAndDeviceId = queue.consume()
     // 必须为alive状态的worker
     var hostUrl = HashedUtil.getNodeByKey(appkeyAndDeviceId)
-    while (hostUrl==null){
-      println("node is null, sleep 1s ")
+    while (hostUrl == null) {
+      println("node is null, sleep 1000 ms ")
       Thread.sleep(1000)
       hostUrl = HashedUtil.getNodeByKey(appkeyAndDeviceId)
 

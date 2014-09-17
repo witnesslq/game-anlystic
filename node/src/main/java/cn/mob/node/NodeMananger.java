@@ -1,4 +1,4 @@
-package cn.mob.anlystic.cluster;
+package cn.mob.node;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -8,7 +8,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 分布式节点管理类
- *当新添加节点或者remove节点通知HashedUtil节点变化，key和node的映射关系
+ * 当新添加节点或者remove节点通知HashedUtil节点变化，key和node的映射关系
+ *
  * @author : Dempe
  * @version 1.0 date : 2014/9/17
  */
@@ -36,6 +37,7 @@ public class NodeMananger {
 
     /**
      * 默认新添加的node为alive状态
+     *
      * @param node
      */
     public static void put(Node node) {

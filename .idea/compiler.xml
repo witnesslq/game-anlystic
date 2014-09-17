@@ -23,11 +23,13 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="anlystic" />
+        <module name="node" />
         <module name="query" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="anlystic" target="1.6" />
+      <module name="node" target="1.6" />
       <module name="query" target="1.6" />
     </bytecodeTargetLevel>
   </component>

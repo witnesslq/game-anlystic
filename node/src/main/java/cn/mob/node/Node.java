@@ -1,12 +1,10 @@
-package cn.mob.anlystic.cluster;
-
-import java.io.Serializable;
+package cn.mob.node;
 
 /**
  * @author : Dempe
  * @version 1.0 date : 2014/9/17
  */
-public class Node implements Serializable {
+public class Node {
 
     private String nodename;
 
@@ -14,10 +12,10 @@ public class Node implements Serializable {
 
     private int port;
 
-    public Node(String nodename,String hostname, int port) {
+    public Node(String nodename, String hostname, int port) {
         this.hostname = hostname;
         this.port = port;
-        this.nodename=nodename;
+        this.nodename = nodename;
     }
 
     public String getHostname() {
@@ -60,6 +58,6 @@ public class Node implements Serializable {
 
     @Override
     public String toString() {
-       return new StringBuffer("akka.tcp://").append(nodename).append("@").append(hostname).append(":").append(port).toString();
+        return new StringBuffer("akka.tcp://").append(nodename).append("@").append(hostname).append(":").append(port).toString();
     }
 }
