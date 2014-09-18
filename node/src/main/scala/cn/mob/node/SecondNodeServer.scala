@@ -8,16 +8,14 @@ package cn.mob.node
 object SecondNodeServer extends App {
 
   val nodeConf = new NodeConf()
-  val context = new NodeContext("node@127.0.0.1:2702","node1@127.0.0.1:2701",nodeConf)
+  nodeConf.setLocalNode("node@127.0.0.1:2702")
+  // 支持多个上游节点，用逗号隔开
+  nodeConf.setPreNodes("node@127.0.0.1:2701")
+
+  val context = new NodeContext(nodeConf)
 
   context.start()
 
-  context.job ! "hello"
-
-  //  while (true){
-  //    val msg = context.getMessage()
-  //    println("msg===>"+msg)
-  //  }
 
 
 }

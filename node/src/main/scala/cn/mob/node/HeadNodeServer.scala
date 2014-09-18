@@ -8,6 +8,9 @@ import scala.concurrent.duration._
 object HeadNodeServer extends App{
 
   val nodeConf = new NodeConf()
+  // 默认无下游节点, 即默认为head node
+  nodeConf.setLocalNode("node@127.0.0.1:2701")
+
   val context = new NodeContext(nodeConf)
 
   context.start()
