@@ -27,6 +27,14 @@ public class NodeConf {
 
     }
 
+    public void setLocalNode(Node localNode) {
+        this.localNode = localNode;
+    }
+
+    public void setPreNodes(List<Node> preNodes) {
+        this.preNodes = preNodes;
+    }
+
     public Node getLocalNode() {
         return localNode;
     }
@@ -37,7 +45,7 @@ public class NodeConf {
     }
 
 
-    private List<Node> fromStringList(List<Object> nodeStrs) {
+    public List<Node> fromStringList(List<Object> nodeStrs) {
         List<Node> nodes = new ArrayList<Node>();
         for (Object nodeStr : nodeStrs) {
             nodes.add(fromString((String) nodeStr));
@@ -45,7 +53,7 @@ public class NodeConf {
         return nodes;
     }
 
-    private Node fromString(String nodeStr) {
+    public Node fromString(String nodeStr) {
         String nodename = StringUtils.substringBefore(nodeStr,"@");
         String uri = StringUtils.substringAfter(nodeStr,"@");
         String hostname = StringUtils.substringBefore(uri, ":");
@@ -57,6 +65,7 @@ public class NodeConf {
         String localNode = Conf.getString(Constants.LOCAL_NODE);
         return StringUtils.substringBefore(localNode,"@");
     }
+
 
 
 }

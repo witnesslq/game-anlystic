@@ -14,15 +14,29 @@ import java.util.concurrent.ConcurrentHashMap
  */
 class JobActor extends Actor {
 
+ val jobPath = "/"+Constants.USER+"/"+Constants.JOB
 
   def receive = {
     case msg: String => {
-      println("do job ing")
-      val path = HashedUtil.getNodeByKey(msg) + "/user/job"
-      val actor = WorkerPool.getAndSet(path)
-      actor ! msg
+
+      //处理业务逻辑
+      val result = doWork(msg)
+
+      //分发到下个节点
+      distribution(result)
 
     }
+  }
+
+  def doWork(msg:String):String={
+    println("do job ing")
+    msg
+  }
+
+  def distribution(msg:String)={
+    val path = HashedUtil.getNodeByKey(msg) + jobPath
+    val actor = WorkerPool.getAndSet(path)
+    actor ! msg
   }
 
 
