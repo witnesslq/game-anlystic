@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap
  */
 class JobActor extends Actor {
 
- val jobPath = "/"+Constants.USER+"/"+Constants.JOB
+  val jobPath = "/" + Constants.USER + "/" + Constants.JOB
 
   def receive = {
     case msg: String => {
@@ -28,15 +28,21 @@ class JobActor extends Actor {
     }
   }
 
-  def doWork(msg:String):String={
+  def doWork(msg: String): String = {
     println("do job ing")
     msg
   }
 
-  def distribution(msg:String)={
-    val path = HashedUtil.getNodeByKey(msg) + jobPath
-    val actor = WorkerPool.getAndSet(path)
-    actor ! msg
+  def distribution(msg: String) = {
+    val add  = HashedUtil.getNodeByKey(msg)
+    if (add != null) {
+      val actor = WorkerPool.getAndSet(add.toString + jobPath)
+      actor ! msg
+    }else{
+      println("the next node is null")
+    }
+
+
   }
 
 

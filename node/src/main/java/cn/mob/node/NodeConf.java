@@ -24,6 +24,9 @@ public class NodeConf {
         preNodes = fromStringList(preNodeStrs);
         // nextNodes = fromStringList(nextNodeStrs);
         localNode = fromString(Conf.getString(Constants.LOCAL_NODE));
+        if (localNode == null) {
+            localNode = new Node("node", "127.0.0.1", 2252);
+        }
 
     }
 
@@ -46,6 +49,9 @@ public class NodeConf {
 
 
     public List<Node> fromStringList(List<Object> nodeStrs) {
+        if (nodeStrs == null) {
+            return null;
+        }
         List<Node> nodes = new ArrayList<Node>();
         for (Object nodeStr : nodeStrs) {
             nodes.add(fromString((String) nodeStr));
@@ -54,18 +60,20 @@ public class NodeConf {
     }
 
     public Node fromString(String nodeStr) {
-        String nodename = StringUtils.substringBefore(nodeStr,"@");
-        String uri = StringUtils.substringAfter(nodeStr,"@");
+        if (nodeStr == null) {
+            return null;
+        }
+        String nodename = StringUtils.substringBefore(nodeStr, "@");
+        String uri = StringUtils.substringAfter(nodeStr, "@");
         String hostname = StringUtils.substringBefore(uri, ":");
         int port = Integer.parseInt(StringUtils.substringAfter(uri, ":"));
         return new Node(nodename, hostname, port);
     }
 
-    public String getLocalNodeName(){
+    public String getLocalNodeName() {
         String localNode = Conf.getString(Constants.LOCAL_NODE);
-        return StringUtils.substringBefore(localNode,"@");
+        return StringUtils.substringBefore(localNode, "@");
     }
-
 
 
 }

@@ -6,7 +6,7 @@ import java.io.Serializable;
  * @author : Dempe
  * @version 1.0 date : 2014/9/17
  */
-public class Node implements Serializable{
+public class Node implements Serializable {
 
     private String nodename;
 
