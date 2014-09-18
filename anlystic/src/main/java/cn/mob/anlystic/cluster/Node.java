@@ -14,10 +14,10 @@ public class Node implements Serializable {
 
     private int port;
 
-    public Node(String nodename,String hostname, int port) {
+    public Node(String nodename, String hostname, int port) {
         this.hostname = hostname;
         this.port = port;
-        this.nodename=nodename;
+        this.nodename = nodename;
     }
 
     public String getHostname() {
@@ -60,6 +60,6 @@ public class Node implements Serializable {
 
     @Override
     public String toString() {
-       return new StringBuffer("akka.tcp://").append(nodename).append("@").append(hostname).append(":").append(port).toString();
+        return new StringBuffer("akka.tcp://").append(nodename).append("@").append(hostname).append(":").append(port).toString();
     }
 }

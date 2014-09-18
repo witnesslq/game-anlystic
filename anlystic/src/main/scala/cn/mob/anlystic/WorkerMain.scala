@@ -29,7 +29,7 @@ object WorkerMain extends App {
   //每隔1s向master发送心跳
   system.scheduler.schedule(0 milliseconds, 1000 milliseconds) {
 
-    master ! new Node(hostname, port)
+    master ! new Node("",hostname, port)
   }
 
 }
