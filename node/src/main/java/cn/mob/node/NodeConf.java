@@ -30,14 +30,14 @@ public class NodeConf {
 
     }
 
-    public void setLocalNode(String nodeStr){
+    public void setLocalNode(String nodeStr) {
         setLocalNode(fromString(nodeStr));
     }
 
-    public void setPreNodes(String nodesStr){
+    public void setPreNodes(String nodesStr) {
         List<Node> nodes = new ArrayList<Node>();
         String strs[] = nodesStr.split(",");
-        for(String str: strs){
+        for (String str : strs) {
             nodes.add(fromString(str));
         }
         setPreNodes(nodes);

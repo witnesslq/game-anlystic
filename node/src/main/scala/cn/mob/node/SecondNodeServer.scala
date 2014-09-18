@@ -17,6 +17,5 @@ object SecondNodeServer extends App {
   context.start()
 
 
-
 }
 

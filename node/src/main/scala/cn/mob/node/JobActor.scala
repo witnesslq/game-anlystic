@@ -16,9 +16,12 @@ class JobActor extends Actor {
 
   val jobPath = "/" + Constants.USER + "/" + Constants.JOB
 
+  val stat: MetricsStat = MetricsStat.getInstance()
+
   def receive = {
     case msg: String => {
 
+      stat.incrementAndGet()
       //处理业务逻辑
       val result = doWork(msg)
 
@@ -29,17 +32,17 @@ class JobActor extends Actor {
   }
 
   def doWork(msg: String): String = {
-    println("do job ing")
+    // println("do job ing")
     msg
   }
 
   def distribution(msg: String) = {
-    val add  = HashedUtil.getNodeByKey(msg)
+    val add = HashedUtil.getNodeByKey(msg)
     if (add != null) {
       val actor = WorkerPool.getAndSet(add.toString + jobPath)
       actor ! msg
-    }else{
-      println("the next node is null")
+    } else {
+      //println("the next node is null")
     }
 
 

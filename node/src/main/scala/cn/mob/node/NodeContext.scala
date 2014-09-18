@@ -58,7 +58,7 @@ class NodeContext(nodeConf: NodeConf) {
 
       import system.dispatcher
       //每隔60s向master发送心跳
-      system.scheduler.schedule(0 milliseconds, 60000 milliseconds) {
+      system.scheduler.schedule(0 milliseconds, 1000 milliseconds) {
         //通知上个节点 本节点可用
         preNodeActors.foreach(actor => actor ! localNode)
 
